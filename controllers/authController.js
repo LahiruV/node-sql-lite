@@ -17,8 +17,8 @@ exports.logout = (req, res) => {
 };
 
 exports.signup = (req, res) => {
-    const { username, password } = req.body;
-    db.run("INSERT INTO users (username, password, isAdmin) VALUES (?, ?, 0)", [username, password], function (err) {
+    const { username, password, isAdmin } = req.body;
+    db.run("INSERT INTO users (username, password, isAdmin) VALUES (?, ?, ?)", [username, password, isAdmin], function (err) {
         if (err) return res.status(500).json({ error: err.message });
         res.status(201).json({ message: "User registered", userId: this.lastID });
     });

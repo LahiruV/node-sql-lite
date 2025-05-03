@@ -1,5 +1,13 @@
 const db = require("../models/db");
 
+// GET all events
+exports.getAllEvents = (req, res) => {
+    db.all("SELECT * FROM events", [], (err, rows) => {
+        if (err) return res.status(500).json({ error: err.message });
+        res.json(rows);
+    });
+};
+
 // GET all events by location
 exports.getEventsByLocation = (req, res) => {
     const location = req.query.location;
